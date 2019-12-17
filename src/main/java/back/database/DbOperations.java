@@ -1,6 +1,6 @@
 package back.database;
 
-import back.controller.User;
+import back.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

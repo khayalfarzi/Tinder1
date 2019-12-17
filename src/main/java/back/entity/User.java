@@ -1,4 +1,4 @@
-package back.controller;
+package back.entity;
 
 public class User {
     private final String name;

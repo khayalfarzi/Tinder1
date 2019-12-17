@@ -1,6 +1,6 @@
 package back.servlets;
 
-import back.controller.User;
+import back.entity.User;
 import back.database.DbOperations;
 import back.template.TemplateEngine;
 
@@ -35,6 +35,7 @@ public class RegisterServ extends HttpServlet {
         User user = new User(name, surname, Integer.parseInt(age), nickname, pass, email);
         try {
             DbOperations.insertMethod(user);
+            engine.render("login.ftl", resp);
         } catch (SQLException e) {
             System.out.println("insert problem: " + e);
         }
