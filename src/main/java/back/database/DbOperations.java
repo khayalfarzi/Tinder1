@@ -26,13 +26,11 @@ public class DbOperations {
         System.out.println("Insert process successfully ");
     }
 
-    public static List<User> loginSelectMethod(String nickname, String pass) throws SQLException {
-        String SQL_Select = "Select * from tinder.tinder.register where user_nickname=? and user_password=?";
+    public static List<User> selectAllMethod() throws SQLException {
+
+        String SQL_Select = "select * from tinder.register";
         Connection connection = DbConnection.connection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_Select);
-        preparedStatement.setString(1, nickname);
-        preparedStatement.setString(2, pass);
-
         List<User> list = new ArrayList<User>();
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -40,11 +38,11 @@ public class DbOperations {
             String name = resultSet.getString("user_name");
             String surname = resultSet.getString("user_surname");
             int age = resultSet.getInt("user_age");
-            String nickname1 = resultSet.getString("user_nickname");
+            String nickname = resultSet.getString("user_nickname");
             String password = resultSet.getString("user_password");
             String email = resultSet.getString("user_email");
 
-            list.add(new User(name, surname, age, nickname1, password, email));
+            list.add(new User(name, surname, age, nickname, password, email));
         }
         return list;
     }

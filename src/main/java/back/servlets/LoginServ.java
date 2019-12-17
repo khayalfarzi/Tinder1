@@ -2,6 +2,7 @@ package back.servlets;
 
 import back.database.DbOperations;
 import back.entity.User;
+import back.service.LoginService;
 import back.template.TemplateEngine;
 
 import javax.servlet.ServletException;
@@ -30,14 +31,16 @@ public class LoginServ extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nickname = req.getParameter("nickname");
         String password = req.getParameter("psw");
+        LoginService service = new LoginService();
 
         try {
-            DbOperations.loginSelectMethod(nickname,password);
-            engine.render("like-page.ftl",resp);
-
-        }catch (SQLException e) {
-            System.out.println("Error!!! You haven't any account yet.");
-
+            if (service.check(nickname, password)) {
+                engine.render("like-page.ftl", resp);
+            } else {
+                engine.render("login.ftl", resp);
+            }
+        } catch (SQLException e) {
+            System.out.println("Login problem from" + e);
         }
 
     }

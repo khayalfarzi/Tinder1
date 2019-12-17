@@ -2,6 +2,7 @@ package back.servlets;
 
 import back.entity.User;
 import back.database.DbOperations;
+import back.service.RegisterService;
 import back.template.TemplateEngine;
 
 import javax.servlet.ServletException;
@@ -33,8 +34,9 @@ public class RegisterServ extends HttpServlet {
         String nickname = req.getParameter("nickname");
         String pass = req.getParameter("pass");
         User user = new User(name, surname, Integer.parseInt(age), nickname, pass, email);
+        RegisterService service = new RegisterService();
         try {
-            DbOperations.insertMethod(user);
+            service.add(user);
             engine.render("login.ftl", resp);
         } catch (SQLException e) {
             System.out.println("insert problem: " + e);
