@@ -1,5 +1,7 @@
 package back.servlets;
 
+import back.database.DbOperations;
+import back.entity.User;
 import back.template.TemplateEngine;
 
 import javax.servlet.ServletException;
@@ -7,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginServ extends HttpServlet {
 
@@ -23,6 +28,17 @@ public class LoginServ extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String nickname = req.getParameter("nickname");
+        String password = req.getParameter("psw");
+
+        try {
+            DbOperations.loginSelectMethod(nickname,password);
+            engine.render("like-page.ftl",resp);
+
+        }catch (SQLException e) {
+            System.out.println("Error!!! You haven't any account yet.");
+
+        }
+
     }
 }
