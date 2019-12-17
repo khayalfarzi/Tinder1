@@ -1,4 +1,4 @@
-package back.application;
+package back;
 
 import back.servlets.LoginServ;
 import back.servlets.RegisterServ;
