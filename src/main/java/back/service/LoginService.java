@@ -21,12 +21,13 @@ public class LoginService implements LoginInterface<User> {
     }
 
     public boolean check(String nickname, String password) throws SQLException {
-        for (int i = 0; i < getAllUser().size(); i++) {
-            if (getAllUser().get(i).getNickname().equals(nickname)
-                    && getAllUser().get(i).getPassword().equals(password)) {
-                    return true;
+        for (User user : getAllUser()) {
+            if (nickname.equals(user.getNickname()) && password.equals(user.getPassword())) {
+                return true;
             }
         }
         return false;
     }
+
+
 }

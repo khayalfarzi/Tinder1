@@ -31,11 +31,14 @@ public class LoginServ extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nickname = req.getParameter("nickname");
         String password = req.getParameter("psw");
+
         LoginService service = new LoginService();
 
         try {
             if (service.check(nickname, password)) {
+
                 engine.render("like-page.ftl", resp);
+
             } else {
                 engine.render("login.ftl", resp);
             }

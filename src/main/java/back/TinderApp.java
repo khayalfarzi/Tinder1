@@ -21,11 +21,12 @@ public class TinderApp {
         Server server = new Server(9002);
 
         TemplateEngine te = TemplateEngine.resources("/templates");
+
         ServletContextHandler handler = new ServletContextHandler();
         handler.addServlet((new ServletHolder(new StaticContentServlet("src/main/resources/templates"))), "/static/*");
         handler.addServlet(new ServletHolder(new RegisterServ(te)), "/register/*");
         handler.addServlet(new ServletHolder(new LoginServ(te)), "/login/*");
-        handler.addServlet(new ServletHolder(new LikePageServ(te)), "/like/*");
+        handler.addServlet(new ServletHolder(new LikePageServ(te)), "/liked/*");
         server.setHandler(handler);
         server.join();
         server.start();
