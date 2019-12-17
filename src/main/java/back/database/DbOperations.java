@@ -26,7 +26,7 @@ public class DbOperations {
         System.out.println("Insert process successfully ");
     }
 
-    public static List<User> selectMethod(String nickname, String pass) throws SQLException {
+    public static List<User> loginSelectMethod(String nickname, String pass) throws SQLException {
         String SQL_Select = "Select * from tinder.tinder.register where user_nickname=? and user_password=?";
         Connection connection = DbConnection.connection();
         PreparedStatement preparedStatement = connection.prepareStatement(SQL_Select);
