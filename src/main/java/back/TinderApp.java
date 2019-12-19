@@ -18,7 +18,14 @@ import org.eclipse.jetty.servlet.ServletHolder;
 public class TinderApp {
 
     public static void main(String[] args) throws Exception {
-        Server server = new Server(9002);
+
+        int port;
+        try {
+            port = Integer.parseInt(System.getenv("PORT"));
+        } catch (NumberFormatException ex) {
+            port = 9002;
+        }
+        Server server = new Server(port);
 
         TemplateEngine te = TemplateEngine.resources("/templates");
 
