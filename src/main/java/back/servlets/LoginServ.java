@@ -37,10 +37,10 @@ public class LoginServ extends HttpServlet {
         try {
             if (service.check(nickname, password)) {
 
-                engine.render("like-page.ftl", resp);
+                resp.sendRedirect("/users/");
 
             } else {
-                engine.render("login.ftl", resp);
+                resp.sendRedirect("/login/");
             }
         } catch (SQLException e) {
             System.out.println("Login problem from" + e);
